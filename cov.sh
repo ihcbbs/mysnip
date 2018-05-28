@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-echo "hello" ;
+printf "hello" ;
 #echo "$(ls -al .)"
 #正则语法可选posix-awk,posix-basic, posix-egrep 和posix-extended.
 #echo "$(find . -regextype posix-extended  \( -type f -iregex '.*\.(mp4|mkv|rmvb|avi|webm)$' \) -not \( -iregex '.*/_x256' \))"
@@ -16,25 +16,41 @@ rm -rf temp.mkv vp9.txt ffmpeg.txt
 mypath="."
 
 
-coursemod=0;
+coursemode=0;
 force=0;
 
 #i要在外面定义；for作用域无效
 while [ $# -ge 1 ]; do
 case $1 in
--d) mypath=$2
+-s) mypath=$2
 shift
 shift
+
+if  [ ! \( -d $mypath \) ];then 
+echo "error3";
+exit 1;
+fi
+despath=$(mypath)
+#echo "$despath"
+continue;;
+-d) despath=$2
+shift
+shift
+if  [ ! \( -d $despath \) ];then 
+echo "error3";
+exit 1;
+fi
 continue;;
 -e) expath=$2
 shift
 shift
 if  [ ! \( -d $expath \) ];then 
-echo "error3";
+echo "error4";
 exit 1;
 fi
 continue;;
--c) coursemod=1
+
+-c) coursemode=1
 shift
 continue;;
 -f) force=1
@@ -46,6 +62,8 @@ esac
 done
 
 
+exit 1
+
 
 
 
@@ -55,7 +73,7 @@ exit 1;
 fi
 
 
-echo "find in $mypath,exclude $expath"
+echo "find in $mypath,despath is $despath ,exclude $expath"
 if [ -n "$expath" ];then 
 echo "exclude"
 find $mypath ! -path $expath  -type f -regextype posix-extended   -iregex '.*\.(mp4|mkv|rmvb|avi|webm)$'  -not   -name '*_vp9.*'    >> vp9.txt
@@ -65,7 +83,6 @@ fi
 
 
 #清除文件find . -type f -regextype posix-extended   -iregex '.*\.(mp4|mkv|rmvb|avi|webm)$'    -name '*_vp9.*'  -delete
-
 while read ifile; do 
 #ffmpeg -i $(echo "$ifile");
 #echo "$ifile"|xargs -n1 -I ffmpeg -i {} ;
@@ -86,15 +103,22 @@ fi
 #voa=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[1].tags.handler_name')
 
 width=0; 
-width=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[0].width');
-height=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[0].height');
-fps=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[0].avg_frame_rate');
+probeOut=$(ffprobe  -hide_banner -show_streams -print_format json $ifile);
+
+
+
+
+
+width=$(echo " ${probeOut} "|jq  '.streams[0].width');
+
+height=$(echo " ${probeOut} "|jq  '.streams[0].height');
+fps=$(echo " ${probeOut} "|jq  '.streams[0].avg_frame_rate');
 #height=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[0].height');
-echo "width2 : $width"
+echo "width : $width"
 if [ $width = "null" ];then
-width=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[1].width');
-height=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[1].height');
-fps=$(ffprobe  -hide_banner -show_streams -print_format json $ifile  |jq  '.streams[1].avg_frame_rate');
+width=$(echo " ${probeOut} "|jq  '.streams[1].width');
+height=$(echo " ${probeOut} "|jq  '.streams[1].height');
+fps=$(echo " ${probeOut} "|jq  '.streams[1].avg_frame_rate');
 fi
 if [ $width = "null" ];then
 continue;
@@ -153,16 +177,18 @@ echo "\n ----------------输入文件 $ifile -----------------------------------
 #（x265）课程等基本静态内容crf=$(echo "32-($reso+100)/250"|bc)
 #echo "$ifile"|sed 's/\.mp4/\_x256.mp4/'
 
-#当前格式一定在第一个
-ofile=$(echo "$ofile"|sed 's/.mkv/\_vp9.mkv/')
-ofile=$(echo "$ofile"|sed 's/.MKV/\_vp9.mkv/')
-ofile=$(echo "$ifile"|sed 's/.mp4/\_vp9.mkv/')
-ofile=$(echo "$ofile"|sed 's/.MP4/\_vp9.mkv/')
-ofile=$(echo "$ofile"|sed 's/.avi/\_vp9.mkv/')
-ofile=$(echo "$ofile"|sed 's/.AVI/\_vp9.mkv/')
-ofile=$(echo "$ofile"|sed 's/.webm/\_vp9.mkv/')
-ofile=$(echo "$ofile"|sed 's/.WEBM/\_vp9.mkv/')
-echo "$ofile"
+#当前格式一定在第一个，仅第一个为ifile
+ofile=$(echo "$ifile"|sed 's/\.mkv/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.MKV/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.mp4/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.MP4/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.avi/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.AVI/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.webm/\_vp9.mkv/')
+ofile=$(echo "$ofile"|sed 's/\.WEBM/\_vp9.mkv/')
+#有变量的sed用双引号
+ofile=$(echo "$ofile"|sed -e "s#${mypath}#${despath}/#")
+
 if [ -f $ofile ]; then 
 echo "$ofile is exist"
 continue

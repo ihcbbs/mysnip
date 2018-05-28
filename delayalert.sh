@@ -21,6 +21,7 @@ if [ $Issue -lt 91  ];then
 fi
 
 mv /web/temp /web/alert.txt
-
-chown -R www-data:www-data /web
+#待测试
+chown -R root:root /web
+chmod  -R a+r /web
 exit 0
