@@ -7,26 +7,25 @@ rm ~/.ssh/id_rsa.pub
  cd ~/.ssh;
  rm -rf authorized_keys;
 cat id_rsa.pub >> authorized_keys;
-rm -f id_rsa.pub;
 chmod 600 authorized_keys;
 
 cd /etc/ssh 
-rm -f sshd_config
-wget https://raw.githubusercontent.com/ihcbbs/mysnip/master/sshd_config
+
+wget -O sshd_config https://raw.githubusercontent.com/ihcbbs/mysnip/master/sshd_config
 service ssh restart;
 
 
 
 cd /etc
 rm -f sysctl.conf
-wget https://raw.githubusercontent.com/ihcbbs/mysnip/master/sysctl.conf
+wget -O sysctl.conf https://raw.githubusercontent.com/ihcbbs/mysnip/master/sysctl.conf
 sysctl -p
 cd -
 
 apt update && apt upgrade -y
 
-#低版本wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.76/linux-image-4.9.76-040976-generic_4.9.76-040976.201801100432_amd64.deb
+#低版本wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.92/linux-image-4.9.92-040992-generic_4.9.92-040992.201803311730_amd64.deb
 
-#32位版本 wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.76/linux-image-4.9.76-040976-generic_4.9.76-040976.201801100432_i386.deb
+#32位版本 wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.92/linux-image-4.9.92-040992-generic_4.9.92-040992.201803311730_i386.deb
 #dpkg -i linux-image-4.9*.deb
 
