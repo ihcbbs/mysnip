@@ -60,7 +60,7 @@ antigen bundle supercrabtree/k
 antigen bundle Vifon/deer
 
 # uncomment the line below to enable theme
-# antigen theme fishy
+ antigen theme ys
 
 
 # check login shell
