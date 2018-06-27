@@ -47,6 +47,29 @@ antigen bundle git
 antigen bundle heroku
 antigen bundle pip
 antigen bundle svn-fast-info
+
+antigen bundle chrissicool/zsh-256color
+antigen bundle hlissner/zsh-autopair
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle popstas/zsh-command-time
+antigen bundle tymm/zsh-directory-history
+antigen bundle RobSis/zsh-completion-generator
+antigen bundle ytet5uy4/fzf-widgets
+antigen bundle seletskiy/zsh-fuzzy-search-and-edit
+antigen bundle seletskiy/zsh-fuzzy-search-and-edit
+antigen bundle zdharma/fast-syntax-highlighting
+antigen bundle b4b4r07/enhancd
+antigen bundle felixr/docker-zsh-completion
+antigen bundle psprint/zsh-editing-workbench
+antigen bundle fALKENdk/mylocation
+antigen bundle lukechilds/zsh-nvm
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle sharat87/pip-app
+antigen bundle psprint/zsh-navigation-tools
+antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle molovo/tipz
+antigen bundle jreese/zsh-titles
+antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 # antigen bundle command-not-find
 
 antigen bundle colorize
