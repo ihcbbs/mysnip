@@ -55,8 +55,7 @@ antigen bundle popstas/zsh-command-time
 antigen bundle tymm/zsh-directory-history
 antigen bundle RobSis/zsh-completion-generator
 antigen bundle ytet5uy4/fzf-widgets
-antigen bundle seletskiy/zsh-fuzzy-search-and-edit
-antigen bundle seletskiy/zsh-fuzzy-search-and-edit
+
 antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle b4b4r07/enhancd
 antigen bundle felixr/docker-zsh-completion
