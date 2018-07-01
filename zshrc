@@ -58,7 +58,7 @@ antigen bundle RobSis/zsh-completion-generator
 antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle b4b4r07/enhancd
 antigen bundle felixr/docker-zsh-completion
-antigen bundle psprint/zsh-editing-workbench
+#antigen bundle psprint/zsh-editing-workbench
 antigen bundle fALKENdk/mylocation
 antigen bundle lukechilds/zsh-nvm
 antigen bundle zsh-users/zsh-syntax-highlighting
