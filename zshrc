@@ -49,7 +49,6 @@ antigen bundle pip
 antigen bundle svn-fast-info
 
 antigen bundle chrissicool/zsh-256color
-antigen bundle hlissner/zsh-autopair
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle popstas/zsh-command-time
 antigen bundle tymm/zsh-directory-history
