@@ -1,3 +1,17 @@
 #!/bin/sh
 export XKL_XMODMAP_DISABLE=1
+
+unsetSESSION_MANAGER         //去掉此行井号注释
+exec/etc/X11/xinit/xinitrc   //去掉此行井号注释
 exec startxfce4
+#[ -x/etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+
+#[ -r$HOME/.Xresources ] && xrdb $HOME/.Xresources
+
+xsetroot-solid grey
+
+vncconfig-iconic &
+
+xterm-geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &xfce4-session &
+
+ 
