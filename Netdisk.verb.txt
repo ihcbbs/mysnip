@@ -16,7 +16,7 @@ load_Netdisk()
     w_call fakechinese
 
 	# Other necessities
-	w_call ie8
+	w_call ie10
 
 	w_call msls31
 
