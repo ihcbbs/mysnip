@@ -68,7 +68,7 @@ antigen bundle molovo/tipz
 antigen bundle jreese/zsh-titles
 antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 antigen bundle extract
-antigen bundle nojhan/liquidprompt
+#antigen bundle nojhan/liquidprompt
 
 # antigen bundle command-not-find
 
