@@ -53,7 +53,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle popstas/zsh-command-time
 antigen bundle tymm/zsh-directory-history
 antigen bundle RobSis/zsh-completion-generator
-
+antigen bundle wting/autojump
 antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle b4b4r07/enhancd
 antigen bundle felixr/docker-zsh-completion
@@ -67,6 +67,8 @@ antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle molovo/tipz
 antigen bundle jreese/zsh-titles
 antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
+antigen bundle extract
+
 # antigen bundle command-not-find
 
 antigen bundle colorize
@@ -88,6 +90,8 @@ if [[ -o login ]]; then
 	[ -f "$HOME/.local/etc/login.sh" ] && source "$HOME/.local/etc/login.sh"
 	[ -f "$HOME/.local/etc/login.zsh" ] && source "$HOME/.local/etc/login.zsh"
 fi
+
+
 
 # syntax color definition
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -118,7 +122,7 @@ zle -N deer
 
 
 
-
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
 
 
