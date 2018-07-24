@@ -144,8 +144,8 @@ bindkey '\eK' end-of-line
 
 #自定义的
 bindkey '^u' undo
-bindkey '^H' backward-word
-bindkey '^L' forward-word
+bindkey '^J' backward-word
+bindkey '^K' forward-word
 
 
 
