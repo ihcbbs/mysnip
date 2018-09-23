@@ -146,7 +146,8 @@ bindkey '\eK' end-of-line
 bindkey '^u' undo
 bindkey '^J' backward-word
 bindkey '^K' forward-word
-
+bindkey '^B' beginning-of-line
+bindkey '^N' end-of-line
 
 
 bindkey -s '\eo' 'cd ..\n'
@@ -161,6 +162,9 @@ bindkey '\ev' deer
 
 alias lk='k --no-vcs'
 export EDITOR='nano'
+export EDITOR='mcedit'
+export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+
 
 
 
