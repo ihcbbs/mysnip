@@ -1,3 +1,6 @@
+
+export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+
 # Antigen: https://github.com/zsh-users/antigen
 ANTIGEN="$HOME/.local/bin/antigen.zsh"
 
@@ -163,7 +166,6 @@ bindkey '\ev' deer
 alias lk='k --no-vcs'
 export EDITOR='nano'
 export EDITOR='mcedit'
-export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 
 
 
