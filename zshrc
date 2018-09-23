@@ -146,7 +146,7 @@ bindkey '\eK' end-of-line
 bindkey '^u' undo
 bindkey '^J' backward-word
 bindkey '^K' forward-word
-bindkey '^L' beginning-of-line
+bindkey '^N' beginning-of-line
 bindkey '^M' end-of-line
 
 
