@@ -1,3 +1,5 @@
+#!/usr/bin/sh
+
 cd /root
 wget -O id_rsa.pub https://raw.githubusercontent.com/ihcbbs/mysnip/master/id_rsa.pub
 mkdir .ssh
