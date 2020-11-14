@@ -169,5 +169,6 @@ export EDITOR='mcedit'
 
 
 
+setopt nonomatch
 
 
