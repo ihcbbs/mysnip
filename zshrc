@@ -172,3 +172,4 @@ export EDITOR='mcedit'
 setopt nonomatch
 
 
+eval "$(starship init zsh)"
