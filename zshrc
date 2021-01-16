@@ -113,7 +113,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 
 # enable syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme  mortalscumbag
+antigen theme  robbyrussell
 antigen apply
 
 # setup for deer
