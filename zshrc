@@ -165,7 +165,6 @@ bindkey '\ev' deer
 
 alias lk='k --no-vcs'
 export EDITOR='nano'
-export EDITOR='mcedit'
 
 
 
