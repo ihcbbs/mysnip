@@ -2,16 +2,14 @@
 #/usr/bin/mv -f $3 /data/aria2/adown/stop/
 path=$3
 parents=$(/usr/bin/dirname $path)
-if [[ $parents =~ "/data/aria2/adown/" ]]; then
-    path=$parents
-    parents=$(/usr/bin/dirname $path)
-fi
-if [[ $parents =~ "/data/aria2/adown/" ]]; then
-    path=$parents
-    parents=$(/usr/bin/dirname $path)
-fi
-if [[ $parents =~ "/data/aria2/adown/" ]]; then
+if [ $2 -eq 0 ]; then
     exit 0
 fi
-/usr/bin/mv -f $path /data/aria2/adown/stop/
-/usr/bin/echo "$path".aria2 >>/.aria2/aria2.log
+if [ $2 -eq 1 ]; then
+    /usr/bin/mv -f $path /data/aria2/adown/stop/
+    /usr/bin/echo "$path".aria2 >>/.aria2/0.log
+
+    exit 0
+fi
+/usr/bin/mv -f $parents /data/aria2/adown/stop/
+/usr/bin/echo "$parents".aria2 >>/.aria2/0.log
