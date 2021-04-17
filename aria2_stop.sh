@@ -14,3 +14,4 @@ if [[ $parents =~ "/data/aria2/adown/" ]]; then
     exit 0
 fi
 /usr/bin/mv -f $path /data/aria2/adown/stop/
+/usr/bin/rm -rf "$path".aria2
