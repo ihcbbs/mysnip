@@ -123,7 +123,6 @@ zle -N deer
 
 autoload bashcompinit
 bashcompinit
-source /path/to/gh_complete.sh
 
 
 
