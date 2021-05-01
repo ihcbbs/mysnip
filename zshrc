@@ -167,7 +167,7 @@ bindkey '\ev' deer
 
 alias lk='k --no-vcs'
 export EDITOR='micro'
-
+export BAT_THEME="ansi-light"
 
 
 setopt nonomatch
