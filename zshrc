@@ -166,7 +166,7 @@ bindkey '\e[1;3B' end-of-line
 bindkey '\ev' deer
 
 alias lk='k --no-vcs'
-export EDITOR='nano'
+export EDITOR='micro'
 
 
 
