@@ -166,7 +166,7 @@ bindkey '\e[1;3B' end-of-line
 bindkey '\ev' deer
 
 alias lk='k --no-vcs'
-export EDITOR='micro'
+export EDITOR='nano'
 export BAT_THEME="ansi-light"
 
 
