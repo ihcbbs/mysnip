@@ -491,4 +491,4 @@ fi
 if [ "$funcstack[1]" = "_lxc" ]; then
 	_lxc
 fi
-eval "$(starship init zsh)"
+
