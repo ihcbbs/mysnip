@@ -2,6 +2,7 @@ ip route add 1.0.1.0/24 dev tun_olink
 ip route add 1.0.2.0/23 dev tun_olink
 ip route add 1.0.8.0/21 dev tun_olink
 ip route add 1.0.32.0/19 dev tun_olink
+ip route add 101.34.207.117/32   tun_olink
 ip route add 1.1.0.0/24 dev tun_olink
 ip route add 1.1.2.0/23 dev tun_olink
 ip route add 1.1.4.0/22 dev tun_olink
