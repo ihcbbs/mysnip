@@ -87,7 +87,7 @@ antigen bundle Vifon/deer
 
 # uncomment the line below to enable theme
  antigen theme ys
-antigen theme romkatv/powerlevel10k
+
 
 # check login shell
 if [[ -o login ]]; then
@@ -113,7 +113,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 
 # enable syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen theme  robbyrussell
+antigen theme  robbyrussell
 antigen apply
 
 # setup for deer
