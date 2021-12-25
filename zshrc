@@ -50,7 +50,6 @@ antigen bundle git
 antigen bundle heroku
 antigen bundle pip
 antigen bundle svn-fast-info
-antigen bundle popstas/zsh-command-time
 
 antigen bundle chrissicool/zsh-256color
 antigen bundle zsh-users/zsh-autosuggestions
@@ -88,7 +87,7 @@ antigen bundle Vifon/deer
 
 # uncomment the line below to enable theme
  antigen theme ys
-
+antigen theme romkatv/powerlevel10k
 
 # check login shell
 if [[ -o login ]]; then
@@ -114,7 +113,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 
 # enable syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme  robbyrussell
+#antigen theme  robbyrussell
 antigen apply
 
 # setup for deer
@@ -492,34 +491,3 @@ fi
 if [ "$funcstack[1]" = "_lxc" ]; then
 	_lxc
 fi
-#compdef restic
-
-_arguments \
-  '1: :->level1' \
-  '2: :_files'
-case $state in
-  level1)
-    case $words[1] in
-      restic)
-        _arguments '1: :(backup cache cat check diff dump find forget generate help init key list ls migrate mount options prune rebuild-index recover restore self-update snapshots stats tag unlock version)'
-      ;;
-      *)
-        _arguments '*: :_files'
-      ;;
-    esac
-  ;;
-  *)
-    _arguments '*: :_files'
-  ;;
-esac
-# If command execution time above min. time, plugins will not output time.
-ZSH_COMMAND_TIME_MIN_SECONDS=3
-
-# Message to display (set to "" for disable).
-ZSH_COMMAND_TIME_MSG="%s s"
-
-# Message color.
-ZSH_COMMAND_TIME_COLOR="cyan"
-
-# Exclude some commands
-ZSH_COMMAND_TIME_EXCLUDE=(vim mcedit)
