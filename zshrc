@@ -86,7 +86,7 @@ antigen bundle supercrabtree/k
 antigen bundle Vifon/deer
 
 # uncomment the line below to enable theme
- antigen theme ys
+ antigen theme half-life
 
 
 # check login shell
