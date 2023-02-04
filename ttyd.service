@@ -4,7 +4,7 @@ After=syslog.target
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/ttyd  -p 38050 login
+ExecStart=/usr/bin/ttyd -t fontSize=23 -t titleFixed=ttyd  -t enableZmodem=true -t disableResizeOverlay=true -t disableReconnect=true -p 38050 login
 Type=simple
 Restart=always
 User=root
