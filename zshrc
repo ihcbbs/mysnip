@@ -51,7 +51,6 @@ antigen bundle heroku
 antigen bundle pip
 antigen bundle svn-fast-info
 
-antigen bundle chrissicool/zsh-256color
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle popstas/zsh-command-time
 antigen bundle tymm/zsh-directory-history
@@ -59,17 +58,10 @@ antigen bundle RobSis/zsh-completion-generator
 antigen bundle wting/autojump
 antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle b4b4r07/enhancd
-antigen bundle felixr/docker-zsh-completion
 #antigen bundle psprint/zsh-editing-workbench
-antigen bundle fALKENdk/mylocation
 antigen bundle lukechilds/zsh-nvm
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle sharat87/pip-app
-antigen bundle psprint/zsh-navigation-tools
 antigen bundle MichaelAquilina/zsh-you-should-use
-antigen bundle molovo/tipz
-antigen bundle jreese/zsh-titles
-antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 antigen bundle extract
 #antigen bundle nojhan/liquidprompt
 
@@ -82,11 +74,9 @@ antigen bundle z
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
-antigen bundle supercrabtree/k
-antigen bundle Vifon/deer
 
 # uncomment the line below to enable theme
- antigen theme half-life
+# antigen theme ys
 
 
 # check login shell
@@ -94,7 +84,7 @@ if [[ -o login ]]; then
 	[ -f "$HOME/.local/etc/login.sh" ] && source "$HOME/.local/etc/login.sh"
 	[ -f "$HOME/.local/etc/login.zsh" ] && source "$HOME/.local/etc/login.zsh"
 fi
-
+    source ~/_docker.zsh
 
 
 # syntax color definition
@@ -113,12 +103,11 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 
 # enable syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen theme  robbyrussell
+antigen theme  half-life
 antigen apply
 
 # setup for deer
-autoload -U deer
-zle -N deer
+
 
 
 autoload bashcompinit
@@ -491,3 +480,5 @@ fi
 if [ "$funcstack[1]" = "_lxc" ]; then
 	_lxc
 fi
+
+export LC_CTYPE=en_US.UTF-8
