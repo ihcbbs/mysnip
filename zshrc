@@ -84,7 +84,7 @@ if [[ -o login ]]; then
 	[ -f "$HOME/.local/etc/login.sh" ] && source "$HOME/.local/etc/login.sh"
 	[ -f "$HOME/.local/etc/login.zsh" ] && source "$HOME/.local/etc/login.zsh"
 fi
-    source ~/_docker.zsh
+    source ~/.docker.zsh
 
 
 # syntax color definition
