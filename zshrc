@@ -137,12 +137,15 @@ bindkey '\eJ' beginning-of-line
 bindkey '\eK' end-of-line
 
 #自定义的
+
 bindkey '^u' undo
 bindkey '^J' backward-word
 bindkey '^K' forward-word
 bindkey '^B' beginning-of-line
 bindkey '^N' end-of-line
-
+#删词，用于ttyd
+bindkey "^p"    backward-delete-word
+bindkey "^w"    backward-delete-word
 
 bindkey -s '\eo' 'cd ..\n'
 bindkey -s '\e;' 'lk\n'
