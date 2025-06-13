@@ -50,10 +50,10 @@ antigen bundle git
 antigen bundle heroku
 antigen bundle pip
 antigen bundle svn-fast-info
-
+antigen bundle unixorn/fzf-zsh-plugin
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle popstas/zsh-command-time
-antigen bundle tymm/zsh-directory-history
+#antigen bundle tymm/zsh-directory-history
 antigen bundle RobSis/zsh-completion-generator
 antigen bundle wting/autojump
 antigen bundle zdharma/fast-syntax-highlighting
