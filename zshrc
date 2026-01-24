@@ -3,6 +3,7 @@ export PATH=/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 
 # Antigen: https://github.com/zsh-users/antigen
 ANTIGEN="$HOME/.local/bin/antigen.zsh"
+precmd () { echo -n "\x1b]1337;CurrentDir=$(pwd)\x07" }
 
 # Install antigen.zsh if not exist
 if [ ! -f "$ANTIGEN" ]; then
