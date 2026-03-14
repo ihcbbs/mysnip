@@ -1,74 +1,69 @@
 #!/usr/bin/env fish
 # ============================================================
-# Fish 配置安装脚本
+# Fish 一键安装脚本
 # 运行方式: fish setup-fish.fish
+# 只需运行一次！
 # ============================================================
 
-echo "🐟 Setting up Fish shell configuration..."
+echo "🐟 Fish Shell 一键配置"
+echo "=========================================="
 
-# ------------------------------------------------------------
-# 创建必要的目录
-# ------------------------------------------------------------
+# 创建目录
 mkdir -p ~/.config/fish/completions
 mkdir -p ~/.config/fish/functions
-mkdir -p ~/.config/fish/conf.d
+mkdir -p ~/.config/fish/fisher
 
-# ------------------------------------------------------------
-# 安装 Fisher（如果未安装）
-# ------------------------------------------------------------
-if not functions -q fisher
-    echo "📦 Installing Fisher..."
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
-    fisher install jorgebucaran/fisher
+# 检查 Fisher 是否已安装
+if functions -q fisher
+    echo "✓ Fisher 已安装"
+else
+    echo "📦 正在安装 Fisher..."
+    curl -sL https://git.io/fisher | source
+    fisher update
 end
 
-# ------------------------------------------------------------
-# 安装推荐插件
-# ------------------------------------------------------------
-echo "🔌 Installing Fish plugins..."
+# 安装插件
+echo ""
+echo "🔌 安装插件..."
 
-# 目录跳转（替代 autojump/z）
-fisher install jethrokuan/z
+set plugins \
+    jethrokuan/z \
+    PatrickF1/fzf.fish \
+    jorgebucaran/autopair.fish
 
-# FZF 集成（替代 fzf-zsh-plugin）
-fisher install PatrickF1/fzf.fish
+for plugin in $plugins
+    echo "  → $plugin"
+    fisher install $plugin 2>/dev/null
+end
 
-# 自动配对括号和引号
-fisher install jorgebucaran/autopair.fish
+# 生成补全
+echo ""
+echo "📝 生成补全..."
 
-# ------------------------------------------------------------
-# 生成补全脚本
-# ------------------------------------------------------------
-echo "📝 Generating completions..."
-
-# Docker
 if type -q docker
     echo "  → Docker"
     docker completion fish > ~/.config/fish/completions/docker.fish 2>/dev/null
 end
 
-# rclone
 if type -q rclone
     echo "  → rclone"
     rclone completion fish > ~/.config/fish/completions/rclone.fish 2>/dev/null
 end
 
-# restic
 if type -q restic
     echo "  → restic"
     restic generate --fish-completion ~/.config/fish/completions/restic.fish 2>/dev/null
 end
 
-# ------------------------------------------------------------
 # 完成
-# ------------------------------------------------------------
 echo ""
-echo "✅ Fish configuration complete!"
+echo "=========================================="
+echo "✅ 配置完成！"
 echo ""
-echo "Installed plugins:"
+echo "已安装插件:"
 fisher list
 echo ""
-echo "Completions generated for:"
+echo "已生成补全:"
 ls ~/.config/fish/completions/*.fish 2>/dev/null | xargs -n1 basename
 echo ""
-echo "Reload your shell or run: source ~/.config/fish/config.fish"
+echo "请重新启动终端，或运行: exec fish"
