@@ -1,157 +1,130 @@
-# =============================================================================
+# ============================================================================
 # Fish Shell Configuration
-# Converted from zsh config
-# =============================================================================
+# 转换自 zsh 配置，适配 Fish shell
+# ============================================================================
 
-# -----------------------------------------------------------------------------
-# PATH Settings
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# 环境变量设置
+# ----------------------------------------------------------------------------
 set -gx PATH /sbin /bin /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin $PATH
 
-# -----------------------------------------------------------------------------
-# Environment Variables
-# -----------------------------------------------------------------------------
+# 编辑器设置
 set -gx EDITOR nano
+
+# Bat 主题
 set -gx BAT_THEME ansi-light
+
+# 语言设置
 set -gx LC_CTYPE en_US.UTF-8
 
-# -----------------------------------------------------------------------------
-# Fisher Plugin Manager Initialization
-# Note: Fisher 4.x should NOT be included in fish_plugins to avoid circular install
-# Install Fisher first if not present:
-# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-# -----------------------------------------------------------------------------
-if not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    if not test -f $XDG_CONFIG_HOME/fish/functions/fisher.fish
-        echo "Installing Fisher..."
-        curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-    end
+# ----------------------------------------------------------------------------
+# Fisher 插件管理器初始化
+# 注意：不要在 config.fish 中自动安装 Fisher，避免循环安装 bug
+# Fisher 只需要手动安装一次：
+#   curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+# ----------------------------------------------------------------------------
+
+# 如果 Fisher 已安装，加载插件
+if functions -q fisher
+    # Fisher 已安装，插件会自动通过 fish_plugins 文件加载
 end
 
-# -----------------------------------------------------------------------------
-# Aliases
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# Fish 内置功能启用
+# Fish 自带 autosuggestions 和 syntax highlighting，只需启用
+# ----------------------------------------------------------------------------
+# 启用自动建议（Fish 3.0+ 默认启用）
+set -g fish_autosuggestion_enabled 1
+
+# ----------------------------------------------------------------------------
+# 别名设置
+# ----------------------------------------------------------------------------
 alias lk 'k --no-vcs'
 
-# -----------------------------------------------------------------------------
-# Docker Completion
-# Generate dynamically using docker completion command
-# Note: NOT using halostatue/fish-docker as per user request
-# -----------------------------------------------------------------------------
-function __ensure_docker_completion --on-event fish_prompt
-    if type -q docker
-        set -l completion_file ~/.config/fish/completions/docker.fish
-        if not test -f $completion_file
-            echo "Generating Docker completion..."
-            mkdir -p ~/.config/fish/completions
-            docker completion fish > $completion_file 2>/dev/null
-        end
+# ----------------------------------------------------------------------------
+# 命令补全生成
+# Docker、rclone、restic、tmux 补全设置
+# ----------------------------------------------------------------------------
+# 创建补全目录（如果不存在）
+mkdir -p $__fish_config_dir/completions
+
+# rclone 补全（如果 rclone 已安装）
+if type -q rclone
+    if not test -f $__fish_config_dir/completions/rclone.fish
+        echo "生成 rclone 补全文件..."
+        rclone completion fish > $__fish_config_dir/completions/rclone.fish
     end
-    functions -e __ensure_docker_completion
 end
 
-# -----------------------------------------------------------------------------
-# Rclone Completion
-# Generate dynamically using rclone completion command
-# -----------------------------------------------------------------------------
-function __ensure_rclone_completion --on-event fish_prompt
-    if type -q rclone
-        set -l completion_file ~/.config/fish/completions/rclone.fish
-        if not test -f $completion_file
-            echo "Generating Rclone completion..."
-            mkdir -p ~/.config/fish/completions
-            rclone completion fish > $completion_file 2>/dev/null
-        end
+# restic 补全（如果 restic 已安装）
+if type -q restic
+    if not test -f $__fish_config_dir/completions/restic.fish
+        echo "生成 restic 补全文件..."
+        restic generate --fish-completion $__fish_config_dir/completions/restic.fish 2>/dev/null
     end
-    functions -e __ensure_rclone_completion
 end
 
-# -----------------------------------------------------------------------------
-# Restic Completion
-# Generate dynamically using restic generate command
-# -----------------------------------------------------------------------------
-function __ensure_restic_completion --on-event fish_prompt
-    if type -q restic
-        set -l completion_file ~/.config/fish/completions/restic.fish
-        if not test -f $completion_file
-            echo "Generating Restic completion..."
-            mkdir -p ~/.config/fish/completions
-            restic generate --fish-completion $completion_file 2>/dev/null
-        end
-    end
-    functions -e __ensure_restic_completion
+# Docker 补全：Fish 4.0+ 自带 Docker 补全
+# 如果需要增强版，安装：fisher install barnybug/docker-fish-completion
+
+# tmux 补全：Fish 自带 tmux 补全
+
+# ----------------------------------------------------------------------------
+# iTerm2 集成（如果使用 iTerm2）
+# ----------------------------------------------------------------------------
+if test -e $HOME/.iterm2_shell_integration.fish
+    source $HOME/.iterm2_shell_integration.fish
 end
 
-# -----------------------------------------------------------------------------
-# Tmux Completion
-# Note: Fish 4.0+ has built-in tmux completion
-# For older versions, we create a basic completion
-# -----------------------------------------------------------------------------
-function __ensure_tmux_completion --on-event fish_prompt
-    if type -q tmux
-        set -l completion_file ~/.config/fish/completions/tmux.fish
-        if not test -f $completion_file
-            # Check if fish version is less than 4.0
-            set -l fish_version (string split . $FISH_VERSION)
-            if test "$fish_version[1]" -lt 4
-                echo "Generating Tmux completion..."
-                mkdir -p ~/.config/fish/completions
-                # Basic tmux completion for older fish versions
-                begin
-                    echo "complete -c tmux -f"
-                    echo ""
-                    echo "# Session management"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a new-session -d 'Create a new session'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a new -d 'Create a new session (short)'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a attach-session -d 'Attach to existing session'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a attach -d 'Attach to existing session (short)'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a a -d 'Attach to existing session (shortest)'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a list-sessions -d 'List sessions'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a ls -d 'List sessions (short)'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a kill-session -d 'Kill session'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a switch-client -d 'Switch client'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a detach-client -d 'Detach client'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a detach -d 'Detach client (short)'"
-                    echo ""
-                    echo "# Window management"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a new-window -d 'Create a new window'"
-                    echo "complete -c tmux -n '__fish_use_subcommand' -a split-window -d 'Split window'"
-                    echo ""
-                    echo "# Common options"
-                    echo "complete -c tmux -s s -l target-session -d 'Target session'"
-                    echo "complete -c tmux -s t -l target -d 'Target'"
-                    echo "complete -c tmux -s d -l detached -d 'Start detached'"
-                    echo "complete -c tmux -s v -l verbose -d 'Verbose output'"
-                    echo "complete -c tmux -s h -l help -d 'Help'"
-                    echo ""
-                    echo "# Session names completion"
-                    echo "function __fish_tmux_sessions"
-                    echo "    tmux list-sessions -F '#S' 2>/dev/null"
-                    echo "end"
-                    echo "complete -c tmux -n '__fish_seen_subcommand_from attach-session attach a switch-client' -a '(__fish_tmux_sessions)' -d 'Session'"
-                    echo "complete -c tmux -n '__fish_seen_subcommand_from kill-session' -a '(__fish_tmux_sessions)' -d 'Session'"
-                    echo "complete -c tmux -n '__fish_seen_subcommand_from has-session' -a '(__fish_tmux_sessions)' -d 'Session'"
-                end > $completion_file
-            end
+# ----------------------------------------------------------------------------
+# 通知当前目录（用于终端模拟器）
+# ----------------------------------------------------------------------------
+function fish_prompt --description 'Write out the prompt'
+    # 通知终端当前目录
+    if set -q ITERM_SESSION_ID
+        printf '\e]1337;CurrentDir=%s\a' (pwd)
+    end
+    
+    # 默认 prompt
+    set -l last_status $status
+    set -l prompt_status
+    
+    if test $last_status -ne 0
+        set prompt_status (set_color red)'['$last_status']'(set_color normal)' '
+    end
+    
+    # 用户名@主机名
+    echo -n (set_color cyan)(whoami)(set_color normal)'@'(set_color yellow)(hostname)(set_color normal)':'
+    
+    # 当前目录
+    echo -n (set_color green)(prompt_pwd)(set_color normal)
+    
+    # Git 状态（如果在 git 仓库中）
+    if set -l git_dir (git rev-parse --git-dir 2>/dev/null)
+        set -l branch (git branch --show-current 2>/dev/null; or git rev-parse --short HEAD 2>/dev/null)
+        if test -n "$branch"
+            echo -n ' '(set_color magagenta)'('$branch')'(set_color normal)
         end
     end
-    functions -e __ensure_tmux_completion
+    
+    # 提示符
+    echo -n $prompt_status'$ '
 end
 
-# -----------------------------------------------------------------------------
-# NVM (Node Version Manager) - Optional
-# Uncomment if you need Node.js version management
-# -----------------------------------------------------------------------------
-# set -gx nvm_default_version lts
-# set -gx nvm_default_packages npm yarn
+# ----------------------------------------------------------------------------
+# 登录 shell 设置
+# ----------------------------------------------------------------------------
+if status is-login
+    # 登录时执行的命令可以放在这里
+end
 
-# -----------------------------------------------------------------------------
-# iTerm2 Integration (macOS only)
-# Uncomment if using iTerm2
-# -----------------------------------------------------------------------------
-# source ~/.iterm2_shell_integration.fish
-
-# =============================================================================
-# End of Configuration
-# =============================================================================
+# ----------------------------------------------------------------------------
+# 交互式 shell 设置
+# ----------------------------------------------------------------------------
+if status is-interactive
+    # 启用 vi 模式（可选，取消注释以启用）
+    # fish_vi_key_bindings
+    
+    # 或使用 emacs 模式（默认）
+    fish_default_key_bindings
+end

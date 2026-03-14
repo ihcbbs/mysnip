@@ -1,23 +1,32 @@
-# Fisher Plugins Configuration
-# Note: fisher itself is NOT included here to avoid circular installation bug
+# Fisher 插件列表
+# 运行 `fisher update` 来安装/更新这些插件
 
-# Autopair - automatic bracket/quote pairing
-jorgebucaran/autopair.fish
+# Fisher 本身
+jorgebucaran/fisher
 
-# FZF integration for fish
-jethrokuan/fzf
+# fzf 集成（对应 zsh 的 fzf-zsh-plugin）
+PatrickF1/fzf.fish
 
-# Z - directory jumping (replaces autojump)
+# 目录跳转（对应 zsh 的 z 和 autojump）
 jethrokuan/z
 
-# Done - notification when long commands finish
+# 命令完成通知（对应 zsh 的 command-time）
 franciscolourenco/done
 
-# Pisces - smart quote pairing
+# 自动配对括号和引号
+jorgebucaran/autopair.fish
+
+# 缩写提示（对应 zsh 的 you-should-use）
+gazorby/fish-abbreviation-tips
+
+# nvm 集成（对应 zsh 的 zsh-nvm）
+jorgebucaran/nvm.fish
+
+# 美观的 prompt 主题（可选，替代 half-life）
+IlanCosman/tide@v6
+
+# Git 状态增强
 laughedelic/pisces
 
-# NVM.fish - Node Version Manager for fish (uncomment if needed)
-# jorgebucaran/nvm.fish
-
-# Abbreviation tips - show abbreviation suggestions
-gazorby/fish-abbreviation-tips
+# Docker 补全增强（可选，Fish 4.0+ 自带 Docker 补全）
+# barnybug/docker-fish-completion
