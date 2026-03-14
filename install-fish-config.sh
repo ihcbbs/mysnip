@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # 安装 Fish Shell 配置
 
 set -e

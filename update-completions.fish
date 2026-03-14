@@ -1,4 +1,4 @@
-﻿# ~/.config/fish/functions/update-completions.fish
+# ~/.config/fish/functions/update-completions.fish
 # 更新所有命令补全的函数
 
 function update-completions --description "Update all completions"
