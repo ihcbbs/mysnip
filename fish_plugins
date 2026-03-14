@@ -1,10 +1,23 @@
-# ~/.config/fish/fish_plugins
-# Fisher 插件列表文件
-# 运行 `fisher update` 安装/更新所有插件
+# Fisher Plugins Configuration
+# Note: fisher itself is NOT included here to avoid circular installation bug
 
-jorgebucaran/fisher
-jorgebucaran/autopair.fish    # 自动括号配对
-jethrokuan/z                  # 目录跳转（替代 zsh 的 z/autojump）
-PatrickF1/fzf.fish            # fzf 集成（替代 fzf-zsh-plugin）
-laughedelic/pisces            # 自动补全引号、括号等
-gazorby/fish-abbreviation-tutorial  # 缩写教程
+# Autopair - automatic bracket/quote pairing
+jorgebucaran/autopair.fish
+
+# FZF integration for fish
+jethrokuan/fzf
+
+# Z - directory jumping (replaces autojump)
+jethrokuan/z
+
+# Done - notification when long commands finish
+franciscolourenco/done
+
+# Pisces - smart quote pairing
+laughedelic/pisces
+
+# NVM.fish - Node Version Manager for fish (uncomment if needed)
+# jorgebucaran/nvm.fish
+
+# Abbreviation tips - show abbreviation suggestions
+gazorby/fish-abbreviation-tips
