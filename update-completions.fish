@@ -24,24 +24,7 @@ function update-completions --description "Update all completions"
         echo "  Restic..."
         restic generate --fish-completion $completion_dir/restic.fish 2>/dev/null
     end
-    
-    # Tmux
-    if command -q tmux
-        echo "  Tmux..."
-        curl -sL https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux > $completion_dir/tmux.fish 2>/dev/null
-    end
-    
-    # LXC
-    if command -q lxc
-        echo "  LXC..."
-        lxc completion fish > $completion_dir/lxc.fish 2>/dev/null
-    end
-    
-    # SFTPGo
-    if command -q sftpgo
-        echo "  SFTPGo..."
-        sftpgo completion fish > $completion_dir/sftpgo.fish 2>/dev/null
-    end
-    
+
+
     echo "Completions updated!"
 end
