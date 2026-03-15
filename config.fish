@@ -128,3 +128,6 @@ if status is-interactive
     # 或使用 emacs 模式（默认）
     fish_default_key_bindings
 end
+function __tabby_working_directory_reporting --on-event fish_prompt
+    echo -en "\e]1337;CurrentDir=$PWD\x7"
+end
