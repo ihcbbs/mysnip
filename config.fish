@@ -59,7 +59,7 @@ if type -q rclone
         rclone completion fish $__fish_config_dir/completions/rclone.fish 2>/dev/null
     end
 end
-
+source /etc/fish/completions/rclone.fish
 # restic 补全（如果 restic 已安装）
 if type -q restic
     if not test -f $__fish_config_dir/completions/restic.fish
