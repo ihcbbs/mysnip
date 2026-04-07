@@ -50,13 +50,8 @@ mkdir -p $__fish_config_dir/completions
 
 
 
-# rclone 补全（如果 rclone 已安装）
-if type -q rclone
-    if not test -f $__fish_config_dir/completions/rclone.fish
-        echo "生成 rclone 补全文件..."
-        rclone completion fish $__fish_config_dir/completions/rclone.fish 2>/dev/null
-    end
-end
+. /etc/fish/completions/rclone.fish
+
 
 # restic 补全（如果 restic 已安装）
 if type -q restic
