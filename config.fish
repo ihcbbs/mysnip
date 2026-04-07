@@ -9,7 +9,7 @@
 set -gx PATH /sbin /bin /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin $PATH
 
 # 编辑器设置
-set -gx EDITOR nano
+set -gx EDITOR micro
 
 # Bat 主题
 set -gx BAT_THEME ansi-light
@@ -66,7 +66,10 @@ end
 
 # Docker 补全：Fish 4.0+ 自带 Docker 补全
 # 如果需要增强版，安装：fisher install barnybug/docker-fish-completion
-
+# 在 config.fish 中添加
+if not functions -q rclone
+    source ~/.config/fish/completions/rclone.fish 2>/dev/null
+end
 # tmux 补全：Fish 自带 tmux 补全
 
 # ----------------------------------------------------------------------------
