@@ -48,9 +48,14 @@ alias lk 'k --no-vcs'
 # 创建补全目录（如果不存在）
 mkdir -p $__fish_config_dir/completions
 
-# 在 config.fish 中添加
-if not functions -q rclone
-    source ~/.config/fish/completions/rclone.fish 2>/dev/null
+
+
+# rclone 补全（如果 rclone 已安装）
+if type -q rclone
+    if not test -f $__fish_config_dir/completions/rclone.fish
+        echo "生成 rclone 补全文件..."
+        rclone completion fish $__fish_config_dir/completions/rclone.fish 2>/dev/null
+    end
 end
 
 # restic 补全（如果 restic 已安装）
