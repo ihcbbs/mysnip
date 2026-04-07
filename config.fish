@@ -12,10 +12,10 @@ set -gx PATH /sbin /bin /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin $PATH
 set -gx EDITOR micro
 
 # Bat 主题
-set -gx BAT_THEME ansi-light
+#set -gx BAT_THEME ansi-light
 
 # 语言设置
-set -gx LC_CTYPE en_US.UTF-8
+set -gx LC_CTYPE zh_CN.UTF-8
 
 # ----------------------------------------------------------------------------
 # Fisher 插件管理器初始化
