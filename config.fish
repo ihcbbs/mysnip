@@ -139,3 +139,6 @@ function __tabby_working_directory_reporting --on-event fish_prompt
     echo -en "\e]1337;CurrentDir=$PWD\x7"
 end
  starship init fish | source
+alias lsa="eza -la --git --icons --time-style='+%b %d %H:%M'"
+alias fd="fdfind"
+set -gx LC_TIME zh_CN.UTF-8
