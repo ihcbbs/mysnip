@@ -1,7 +1,4 @@
 
-PermitRootLogin yes
-
-
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
@@ -12,13 +9,33 @@ PermitRootLogin yes
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
+# In general, the first uncommented definition of an option takes precedence.
+# For options that accept multiple values, like 'Port', subsequent definitions
+# are appended to the configuration.
+#
+# Note that the above implies that configuration options from snippets in
+# /etc/ssh/sshd_config.d/*.conf take precedence over those defined in this
+# file. In addition, configuration snippet files are processed in lexical
+# order, so options defined in files with names that sort earlier take
+# precedence.
+#
+# Such configuration snippets may be present in default installations of
+# Ubuntu.
 Include /etc/ssh/sshd_config.d/*.conf
 
+# When systemd socket activation is used (the default), the socket
+# configuration must be re-generated after changing Port, AddressFamily, or
+# ListenAddress.
+#
+# For changes to take effect, run:
+#
+#   systemctl daemon-reload
+#   systemctl restart ssh.socket
+#
 #Port 22
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
-Port 2629
 
 #HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_ecdsa_key
@@ -34,12 +51,12 @@ Port 2629
 # Authentication:
 
 #LoginGraceTime 2m
-#PermitRootLogin prohibit-password
+PermitRootLogin yes
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
 
-PubkeyAuthentication yes
+#PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
 #AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
@@ -57,13 +74,15 @@ PubkeyAuthentication yes
 # Don't read the user's ~/.rhosts and ~/.shosts files
 #IgnoreRhosts yes
 
-# To disable tunneled clear text passwords, change to no here!
+# To disable tunneled clear text passwords, change to "no" here!
 PasswordAuthentication no
 #PermitEmptyPasswords no
 
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
-#KbdInteractiveAuthentication yes
+# Change to "yes" to enable keyboard-interactive authentication.  Depending on
+# the system's configuration, this may involve passwords, challenge-response,
+# one-time passwords or some combination of these and other methods.
+# Beware issues with some PAM modules and threads.
+KbdInteractiveAuthentication no
 
 # Kerberos options
 #KerberosAuthentication no
@@ -82,16 +101,16 @@ PasswordAuthentication no
 # be allowed through the KbdInteractiveAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via KbdInteractiveAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
+# the setting of "PermitRootLogin prohibit-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and KbdInteractiveAuthentication to 'no'.
-#UsePAM yes
+UsePAM yes
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-#X11Forwarding yes
+X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
@@ -112,8 +131,8 @@ PrintMotd no
 # no default banner path
 #Banner none
 
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
+# Allow client to pass locale and color environment variables
+AcceptEnv LANG LC_* COLORTERM NO_COLOR
 
 # override default of no subsystems
 Subsystem	sftp	/usr/lib/openssh/sftp-server
