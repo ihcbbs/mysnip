@@ -82,7 +82,9 @@ end
 if test -e $HOME/.iterm2_shell_integration.fish
     source $HOME/.iterm2_shell_integration.fish
 end
-
+set -gx NNN_PLUG 'p:preview-tui'
+set -gx NNN_FIFO /tmp/nnn.fifo
+alias n='nnn'
 # ----------------------------------------------------------------------------
 # 通知当前目录（用于终端模拟器）
 # ----------------------------------------------------------------------------
